@@ -29,14 +29,14 @@ test.describe
         // Branding
         await page.getByRole("button", { name: "Global" }).click();
         await expect(
-          page.locator('a:has-text("Made with Typebot")'),
+          page.locator('a:has-text("Made with Brosbots")'),
         ).toHaveAttribute(
           "href",
-          "https://www.typebot.io/?utm_source=litebadge",
+          "https://www.brosbots.com",
         );
-        await page.click('text="Show Typebot brand"');
+        await page.click('text="Show Brosbot brand"');
         await expect(
-          page.locator('a:has-text("Made with Typebot")'),
+          page.locator('a:has-text("Made with Brosbots")'),
         ).toBeHidden();
 
         // Font
@@ -278,7 +278,7 @@ test.describe
         await page.getByRole("menuitem", { name: "Delete" }).click();
         await expect(page.getByText("My awesome theme 2")).toBeHidden();
         await page.getByRole("button", { name: "Gallery" }).click();
-        await page.getByText("Typebot Dark").click();
+        await page.getByText("Brosbot Dark").click();
         await expect(page.getByTestId("host-bubble")).toHaveCSS(
           "background-color",
           "rgb(30, 41, 59)",
@@ -300,7 +300,7 @@ test.describe("Free workspace", () => {
     await expect(
       page.locator('[data-testid="starter-lock-tag"]'),
     ).toBeVisible();
-    await page.click("text=Show Typebot brand");
+    await page.click("text=Show Brosbot brand");
     await expect(
       page.locator(
         'text="You need to upgrade your plan in order to remove branding"',
