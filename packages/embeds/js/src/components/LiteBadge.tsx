@@ -40,7 +40,7 @@ export const LiteBadge = (props: Props) => {
   return (
     <a
       ref={liteBadge}
-      href={"https://www.borsbots.com"}
+      href={"https://www.brosbots.com"}
       target="_blank"
       rel="noopener noreferrer"
       class="lite-badge"
