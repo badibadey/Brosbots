@@ -16,7 +16,7 @@
       "memory": 1024
     },
     "src/pages/api/typebots/[typebotId]/blocks/[blockId]/executeWebhook.ts": {
-      "maxDuration": 30,
+      "maxDuration": 15,
       "memory": 1024
     }
   }
