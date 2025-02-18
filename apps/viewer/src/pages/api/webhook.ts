@@ -1,31 +1,34 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-// Funkcja symulująca przetwarzanie wiadomości przez Twojego bota
-async function processBotMessage(botId: string, message: string) {
-    return `Odpowiedź od bota ${botId}: ${message}`;
-}
-
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     if (req.method !== 'POST') {
         return res.status(405).json({ error: 'Method Not Allowed' });
     }
 
     try {
-        const { botId, transcription } = req.body;
+        // Pobieramy botId z URL
+        const { botId } = req.query;
 
-        if (!botId) {
-            return res.status(400).json({ error: 'Bad Request: Missing botId' });
+        if (!botId || typeof botId !== 'string') {
+            return res.status(400).json({ error: 'Bad Request: Missing or invalid botId' });
         }
 
-        if (!transcription) {
-            return res.status(400).json({ error: 'Bad Request: Missing transcription' });
+        const { session, text } = req.body;
+
+        if (!session || !text) {
+            return res.status(400).json({ error: 'Bad Request: Missing session or text' });
         }
 
-        // Przetwarzanie wiadomości przez Twojego bota w Brosbots
-        const botResponse = await processBotMessage(botId, transcription);
+        console.log(`📞 Nowe zapytanie z AudioCodes: ${text} (Session ID: ${session}, Bot ID: ${botId})`);
 
-        // Zwrócenie odpowiedzi do Twilio / AudioCodes / Telnyx
-        return res.status(200).json({ response: botResponse });
+        // Generujemy odpowiedź bota
+        const botResponse = `Odpowiedź od bota ${botId}: ${text}`;
+
+        // Odpowiadamy w formacie AudioCodes LiveHub
+        return res.status(200).json({
+            session: session,
+            response: botResponse
+        });
 
     } catch (error) {
         console.error('❌ Błąd podczas przetwarzania webhooka:', error);
