@@ -1,8 +1,7 @@
-import { NextApiRequest, NextApiResponse } from 'next';
+import type { NextApiRequest, NextApiResponse } from 'next';
 
 // Funkcja symulująca przetwarzanie wiadomości przez Twojego bota
 async function processBotMessage(botId: string, message: string) {
-    // Tutaj dodaj logikę przetwarzania tekstu przez Twojego bota w Brosbots
     return `Odpowiedź od bota ${botId}: ${message}`;
 }
 
